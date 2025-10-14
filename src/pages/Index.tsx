@@ -1,185 +1,162 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Plus, Sword, Scroll, Hammer, Trophy } from "lucide-react";
-import { AddObjectiveDialog } from "@/components/AddObjectiveDialog";
-
-type Category = "Donjon" | "Quête" | "Craft" | "Succès";
-
-interface Objective {
-  id: string;
-  title: string;
-  description: string;
-  category: Category;
-  completed: boolean;
-}
-
-const categoryIcons = {
-  Donjon: Sword,
-  Quête: Scroll,
-  Craft: Hammer,
-  Succès: Trophy,
-};
-
-const categoryColors = {
-  Donjon: "bg-destructive/10 text-destructive border-destructive/30",
-  Quête: "bg-primary/10 text-primary border-primary/30",
-  Craft: "bg-secondary/10 text-secondary-foreground border-secondary/30",
-  Succès: "bg-accent/10 text-accent border-accent/30",
-};
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Scroll, Search, Trophy, Coins, Target } from "lucide-react";
+import { DonjonCard } from "@/components/DonjonCard";
+import { donjonsData, type Category } from "@/data/donjons";
 
 const Index = () => {
-  const [objectives, setObjectives] = useState<Objective[]>([
-    {
-      id: "1",
-      title: "Vaincre le Dragon Cochon",
-      description: "Terminer le donjon du Dragon Cochon en mode difficile",
-      category: "Donjon",
-      completed: false,
-    },
-    {
-      id: "2",
-      title: "Quête du Dofus Émeraude",
-      description: "Compléter toutes les étapes pour obtenir le Dofus Émeraude",
-      category: "Quête",
-      completed: false,
-    },
-    {
-      id: "3",
-      title: "Forger une Panoplie",
-      description: "Crafter l'ensemble complet de la panoplie Bouftou Royal",
-      category: "Craft",
-      completed: true,
-    },
-  ]);
+  const [donjons, setDonjons] = useState(donjonsData);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState<Category | "all">("all");
 
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const categories: (Category | "all")[] = [
+    "all",
+    "TDD Partie 1",
+    "TDD Partie 2",
+    "TDD Partie 3",
+    "TDD Partie 4",
+    "TDD Partie 5",
+    "TDM Partie 1",
+    "TDM Partie 2",
+    "TDM Partie 3",
+    "TDM Partie 4",
+    "TDM Partie 5",
+    "TDM Partie 6",
+    "TDM Partie 7",
+  ];
 
-  const toggleObjective = (id: string) => {
-    setObjectives(
-      objectives.map((obj) =>
-        obj.id === id ? { ...obj, completed: !obj.completed } : obj
+  const toggleDonjon = (id: string) => {
+    setDonjons(
+      donjons.map((donjon) =>
+        donjon.id === id ? { ...donjon, completed: !donjon.completed } : donjon
       )
     );
   };
 
-  const addObjective = (objective: Omit<Objective, "id">) => {
-    setObjectives([
-      ...objectives,
-      { ...objective, id: Date.now().toString() },
-    ]);
-    setDialogOpen(false);
-  };
+  const filteredDonjons = useMemo(() => {
+    return donjons.filter((donjon) => {
+      const matchesSearch =
+        donjon.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        donjon.boss.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory =
+        filterCategory === "all" || donjon.category === filterCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [donjons, searchTerm, filterCategory]);
 
-  const completedCount = objectives.filter((obj) => obj.completed).length;
-  const totalCount = objectives.length;
+  const stats = useMemo(() => {
+    const completed = donjons.filter((d) => d.completed);
+    const totalKamas = completed.reduce((sum, d) => sum + d.kamasTotal, 0);
+    const totalPoints = completed.reduce((sum, d) => sum + d.pointsSucces, 0);
+    return {
+      completedCount: completed.length,
+      totalCount: donjons.length,
+      totalKamas,
+      totalPoints,
+    };
+  }, [donjons]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted p-4 md:p-8">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
+      <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
+        {/* Header */}
         <header className="text-center space-y-4 py-8">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-            Grimoire d'Objectifs
-          </h1>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <Scroll className="w-12 h-12 text-primary" />
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+              Run de Vaga
+            </h1>
+          </div>
           <p className="text-lg text-muted-foreground">
-            Suivez vos aventures dans le Monde des Douze
+            Guide complet TDD & TDM - Suivi de progression
           </p>
-          <div className="flex items-center justify-center gap-2 text-sm">
-            <Badge variant="secondary" className="text-base px-4 py-2">
-              {completedCount} / {totalCount} Objectifs complétés
+
+          {/* Stats globales */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+            <Badge variant="secondary" className="text-base px-4 py-2 gap-2">
+              <Target className="w-4 h-4" />
+              {stats.completedCount} / {stats.totalCount} Donjons
+            </Badge>
+            <Badge variant="outline" className="text-base px-4 py-2 gap-2 border-primary/30 text-primary">
+              <Coins className="w-4 h-4" />
+              {stats.totalKamas.toLocaleString()}K
+            </Badge>
+            <Badge variant="outline" className="text-base px-4 py-2 gap-2 border-accent/30 text-accent">
+              <Trophy className="w-4 h-4" />
+              {stats.totalPoints} pts
             </Badge>
           </div>
         </header>
 
-        <div className="flex justify-end">
-          <Button
-            onClick={() => setDialogOpen(true)}
-            className="gap-2 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
-            size="lg"
+        {/* Filtres et recherche */}
+        <div className="flex flex-col sm:flex-row gap-4 bg-card p-4 rounded-lg border-2 shadow-md">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Rechercher un donjon ou boss..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <Select
+            value={filterCategory}
+            onValueChange={(value) => setFilterCategory(value as Category | "all")}
           >
-            <Plus className="w-5 h-5" />
-            Nouvel Objectif
-          </Button>
+            <SelectTrigger className="w-full sm:w-[220px]">
+              <SelectValue placeholder="Filtrer par étape" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((cat) => (
+                <SelectItem key={cat} value={cat}>
+                  {cat === "all" ? "Toutes les étapes" : cat}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {objectives.map((objective) => {
-            const Icon = categoryIcons[objective.category];
-            return (
-              <Card
-                key={objective.id}
-                className={`p-6 transition-all duration-300 hover:shadow-lg border-2 ${
-                  objective.completed
-                    ? "opacity-60 bg-muted/50"
-                    : "hover:-translate-y-1"
-                }`}
-                style={{
-                  boxShadow: objective.completed
-                    ? undefined
-                    : "var(--shadow-medieval)",
-                }}
-              >
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3 flex-1">
-                      <Checkbox
-                        checked={objective.completed}
-                        onCheckedChange={() => toggleObjective(objective.id)}
-                        className="w-6 h-6"
-                      />
-                      <div className="flex-1">
-                        <h3
-                          className={`text-lg font-semibold ${
-                            objective.completed ? "line-through" : ""
-                          }`}
-                        >
-                          {objective.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <Icon className="w-5 h-5 text-primary flex-shrink-0" />
-                  </div>
-
-                  <p className="text-sm text-muted-foreground">
-                    {objective.description}
-                  </p>
-
-                  <Badge
-                    variant="outline"
-                    className={`${categoryColors[objective.category]} border`}
-                  >
-                    {objective.category}
-                  </Badge>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
-
-        {objectives.length === 0 && (
-          <Card className="p-12 text-center">
+        {/* Liste des donjons */}
+        {filteredDonjons.length > 0 ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredDonjons.map((donjon) => (
+              <DonjonCard
+                key={donjon.id}
+                donjon={donjon}
+                onToggle={toggleDonjon}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
             <Scroll className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Aucun objectif pour le moment
+              Aucun donjon trouvé
             </h3>
-            <p className="text-muted-foreground mb-4">
-              Commencez à planifier vos aventures dans le Monde des Douze
+            <p className="text-muted-foreground">
+              Essayez de modifier vos filtres de recherche
             </p>
-            <Button onClick={() => setDialogOpen(true)} className="gap-2">
-              <Plus className="w-4 h-4" />
-              Créer votre premier objectif
-            </Button>
-          </Card>
+          </div>
         )}
-      </div>
 
-      <AddObjectiveDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        onAdd={addObjective}
-      />
+        {/* Footer info */}
+        <div className="text-center text-sm text-muted-foreground pt-8 border-t">
+          <p>
+            Guide créé par <span className="font-semibold text-primary">Vaga</span> •{" "}
+            Modifié par <span className="font-semibold text-accent">DamsShiro</span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
