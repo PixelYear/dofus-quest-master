@@ -64,7 +64,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=00gsbrZ1Ff2bkgBD&t=165",
-    travelCommand: "/travel",
+    travelCommand: "/travel 1 -15",
     completed: false,
   },
   {
@@ -83,7 +83,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 57120,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=uZ_4fyFIOkyj5BbB&t=181",
-    travelCommand: "/travel",
+    travelCommand: "/travel 1 -15",
     completed: false,
   },
   {
@@ -104,7 +104,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=pXeMmw4hy7tNvblj&t=193",
-    travelCommand: "/travel",
+    travelCommand: "/travel 1 -15",
     completed: false,
   },
   {
@@ -137,7 +137,8 @@ export const donjonsData: Donjon[] = [
     kamasParPerso: 0,
     kamasTotal: 0,
     pointsSucces: 0,
-    details: "2 miséricorde chafer élite, 1 gros boulet, 1 oreille foufayteur, 1 huile sésame, 1 tronc kokok, 1 coffret maudit du flib, 1 kokopaille, 1 tranche nodkoko",
+    details: "2 miséricorde chafer élite, 1 gros boulet, 1 oreille foufayteur, 1 huile sésame, 1 tronc kokok, 1 coffret maudit du flib, 1 kokopaille, 1 tranche nodkoko. TP à Sufokia",
+    travelCommand: "/travel 15 28",
     completed: false,
   },
   {
@@ -157,7 +158,8 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 69600,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=bWU8DiVuUbwp1gJ4&t=229",
-    travelCommand: "/travel",
+    travelCommand: "/travel 1 -15",
+    notes: "Faire la quête Gardien du pont de la mort : https://www.dofuspourlesnoobs.com/le-gardien-du-pont-de-la-mort.html",
     completed: false,
   },
 
@@ -246,6 +248,21 @@ export const donjonsData: Donjon[] = [
     completed: false,
   },
   {
+    id: "9b",
+    nom: "Capture du Wabbit GM",
+    boss: "Objectif",
+    niveau: 60,
+    category: "TDD Partie 2",
+    type: "quete",
+    succes: [],
+    kamasParPerso: 0,
+    kamasTotal: 0,
+    pointsSucces: 0,
+    details: "Chemin Wabbit GM : https://papycha.fr/chemin-du-wabbit-gm/",
+    travelCommand: "/travel 2 -1",
+    completed: false,
+  },
+  {
     id: "10",
     nom: "Gelaxième Dimension",
     boss: "Les 4 Gelées Royales",
@@ -263,6 +280,8 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 133840,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=baz-Xw1-OArwUhEG&t=320",
+    notes: "Cliquer sur la Multigely",
+    travelCommand: "/travel 2 -1",
     completed: false,
   },
   {
@@ -281,6 +300,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 150720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=jeTbb0LwpMtn4iUo&t=350",
+    travelCommand: "/travel 2 -1",
     completed: false,
   },
   {
@@ -299,13 +319,14 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 100480,
     pointsSucces: 50,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=dQ9Um8mOlsIQ6sRE&t=376",
+    travelCommand: "/travel 2 -1",
     completed: false,
   },
 
   // TDD PARTIE 3
   {
     id: "13",
-    nom: "Labo Brumen",
+    nom: "Labo de Brumen",
     boss: "Nelween",
     niveau: 70,
     category: "TDD Partie 3",
@@ -320,6 +341,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 175840,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=vRpt9U5DzlOeboju&t=439",
+    travelCommand: "/travel 2 -1",
     completed: false,
   },
   {

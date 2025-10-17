@@ -39,6 +39,29 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
     });
   };
 
+  const renderTextWithLinks = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+    
+    return parts.map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline inline-flex items-center gap-1"
+          >
+            {part}
+            <ExternalLink className="w-3 h-3 inline" />
+          </a>
+        );
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   const isQuest = donjon.type === "quete";
 
   return (
@@ -139,7 +162,7 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
             {donjon.details && (
               <div className="text-sm bg-muted/30 p-3 rounded-md">
                 <span className="font-semibold">Ressources requises : </span>
-                <p className="mt-1">{donjon.details}</p>
+                <p className="mt-1">{renderTextWithLinks(donjon.details)}</p>
               </div>
             )}
 
@@ -170,7 +193,7 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
             {donjon.notes && (
               <div className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-md">
                 <span className="font-semibold">Note : </span>
-                {donjon.notes}
+                {renderTextWithLinks(donjon.notes)}
               </div>
             )}
 
