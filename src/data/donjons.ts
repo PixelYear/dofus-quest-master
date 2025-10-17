@@ -18,6 +18,9 @@ export interface Donjon {
   lienVideo?: string;
   notes?: string;
   completed: boolean;
+  travelCommand?: string;
+  type?: "quete" | "donjon";
+  details?: string;
 }
 
 export const donjonsData: Donjon[] = [
@@ -40,6 +43,8 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 22560,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=YbSCRyFpySc18nZG&t=152",
+    travelCommand: "/travel 1 -15",
+    notes: "Se rendre chez Emma Tom Pouce",
     completed: false,
   },
   {
@@ -59,6 +64,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=00gsbrZ1Ff2bkgBD&t=165",
+    travelCommand: "/travel",
     completed: false,
   },
   {
@@ -77,6 +83,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 57120,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=uZ_4fyFIOkyj5BbB&t=181",
+    travelCommand: "/travel",
     completed: false,
   },
   {
@@ -97,6 +104,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=pXeMmw4hy7tNvblj&t=193",
+    travelCommand: "/travel",
     completed: false,
   },
   {
@@ -119,6 +127,20 @@ export const donjonsData: Donjon[] = [
     completed: false,
   },
   {
+    id: "5b",
+    nom: "Quête : Le Nouveau Monde",
+    boss: "Quête",
+    niveau: 50,
+    category: "TDD Partie 1",
+    type: "quete",
+    succes: [],
+    kamasParPerso: 0,
+    kamasTotal: 0,
+    pointsSucces: 0,
+    details: "2 miséricorde chafer élite, 1 gros boulet, 1 oreille foufayteur, 1 huile sésame, 1 tronc kokok, 1 coffret maudit du flib, 1 kokopaille, 1 tranche nodkoko",
+    completed: false,
+  },
+  {
     id: "6",
     nom: "Grotte Hesque",
     boss: "Corailleur Magistral",
@@ -135,6 +157,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 69600,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=bWU8DiVuUbwp1gJ4&t=229",
+    travelCommand: "/travel",
     completed: false,
   },
 
@@ -151,6 +174,21 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 0,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=I9Nhmlwia6vg5yRy&t=248",
     notes: "Garder la save pour faire le multi plus tard",
+    travelCommand: "/travel 2 -1",
+    completed: false,
+  },
+  {
+    id: "7b",
+    nom: "Quête : Partir Un Jour",
+    boss: "Quête",
+    niveau: 60,
+    category: "TDD Partie 2",
+    type: "quete",
+    succes: [],
+    kamasParPerso: 0,
+    kamasTotal: 0,
+    pointsSucces: 0,
+    details: "1 casque, 1 aile en bois amélioré",
     completed: false,
   },
   {
@@ -169,6 +207,22 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 114720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=bODQsjKR1aY_Nl7_&t=268",
+    travelCommand: "/travel 2 -1",
+    completed: false,
+  },
+  {
+    id: "8b",
+    nom: "Quête : Intrusion Chez Les Wabbits",
+    boss: "Quête",
+    niveau: 60,
+    category: "TDD Partie 2",
+    type: "quete",
+    succes: [],
+    kamasParPerso: 0,
+    kamasTotal: 0,
+    pointsSucces: 0,
+    details: "1 ailes de scara bleu / rouge / vert / blanc",
+    travelCommand: "/travel -2,-4",
     completed: false,
   },
   {

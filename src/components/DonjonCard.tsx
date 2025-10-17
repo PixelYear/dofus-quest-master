@@ -10,7 +10,10 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
+  Copy,
+  Scroll,
 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 import { Donjon } from "@/data/donjons";
 import { useState } from "react";
 
@@ -28,6 +31,15 @@ const successTypeColors = {
 
 export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
   const [expanded, setExpanded] = useState(false);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      description: "Commande copiée dans le presse-papier !",
+    });
+  };
+
+  const isQuest = donjon.type === "quete";
 
   return (
     <Card
@@ -50,15 +62,18 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
               className="mt-1 w-5 h-5"
             />
             <div className="flex-1 space-y-1">
-              <h3
-                className={`text-lg font-bold leading-tight ${
-                  donjon.completed ? "line-through" : ""
-                }`}
-              >
-                {donjon.nom}
-              </h3>
+              <div className="flex items-center gap-2">
+                {isQuest && <Scroll className="w-4 h-4 text-primary" />}
+                <h3
+                  className={`text-lg font-bold leading-tight ${
+                    donjon.completed ? "line-through" : ""
+                  }`}
+                >
+                  {donjon.nom}
+                </h3>
+              </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Sword className="w-4 h-4" />
+                {!isQuest && <Sword className="w-4 h-4" />}
                 <span className="font-medium">{donjon.boss}</span>
                 <span className="text-xs">• Niv. {donjon.niveau}</span>
               </div>
@@ -70,21 +85,36 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
         </div>
 
         {/* Stats rapides */}
-        <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="flex items-center gap-2 text-primary">
-            <Coins className="w-4 h-4" />
-            <span className="font-semibold">
-              {donjon.kamasTotal.toLocaleString()}K
-            </span>
+        {!isQuest && (
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <div className="flex items-center gap-2 text-primary">
+              <Coins className="w-4 h-4" />
+              <span className="font-semibold">
+                {donjon.kamasTotal.toLocaleString()}K
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-accent">
+              <Trophy className="w-4 h-4" />
+              <span className="font-semibold">{donjon.pointsSucces} pts</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-accent">
-            <Trophy className="w-4 h-4" />
-            <span className="font-semibold">{donjon.pointsSucces} pts</span>
-          </div>
-        </div>
+        )}
+
+        {/* Bouton Travel */}
+        {donjon.travelCommand && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => copyToClipboard(donjon.travelCommand!)}
+            className="w-full gap-2"
+          >
+            <Copy className="w-4 h-4" />
+            Copier : {donjon.travelCommand}
+          </Button>
+        )}
 
         {/* Bouton pour développer/réduire */}
-        {(donjon.succes.length > 0 || donjon.lienVideo || donjon.notes) && (
+        {(donjon.succes.length > 0 || donjon.lienVideo || donjon.notes || donjon.details) && (
           <Button
             variant="ghost"
             size="sm"
@@ -105,6 +135,14 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
         {/* Détails étendus */}
         {expanded && (
           <div className="space-y-3 pt-2 border-t">
+            {/* Détails quête */}
+            {donjon.details && (
+              <div className="text-sm bg-muted/30 p-3 rounded-md">
+                <span className="font-semibold">Ressources requises : </span>
+                <p className="mt-1">{donjon.details}</p>
+              </div>
+            )}
+
             {/* Succès */}
             {donjon.succes.length > 0 && (
               <div className="space-y-2">
