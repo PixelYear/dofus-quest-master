@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -9,14 +10,63 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Scroll, Search, Trophy, Coins, Target } from "lucide-react";
+import { Scroll, Search, Trophy, Coins, Target, LogOut, Loader2 } from "lucide-react";
 import { DonjonCard } from "@/components/DonjonCard";
 import { donjonsData, type Category } from "@/data/donjons";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
+  const { user, loading: authLoading, signOut } = useAuth();
+  const navigate = useNavigate();
   const [donjons, setDonjons] = useState(donjonsData);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState<Category | "all">("all");
+  const [loadingProgress, setLoadingProgress] = useState(true);
+
+  // Redirect to auth if not logged in
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate("/auth");
+    }
+  }, [user, authLoading, navigate]);
+
+  // Load user progress from database
+  useEffect(() => {
+    const loadProgress = async () => {
+      if (!user) return;
+
+      try {
+        const { data, error } = await supabase
+          .from("user_donjon_progress")
+          .select("*")
+          .eq("user_id", user.id);
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          const progressMap = new Map(data.map((p) => [p.donjon_id, p.completed]));
+          setDonjons(
+            donjonsData.map((donjon) => ({
+              ...donjon,
+              completed: progressMap.get(donjon.id) ?? false,
+            }))
+          );
+        }
+      } catch (error: any) {
+        toast({
+          title: "Erreur",
+          description: "Impossible de charger votre progression",
+          variant: "destructive",
+        });
+      } finally {
+        setLoadingProgress(false);
+      }
+    };
+
+    loadProgress();
+  }, [user]);
 
   const categories: (Category | "all")[] = [
     "all",
@@ -34,12 +84,48 @@ const Index = () => {
     "TDM Partie 7",
   ];
 
-  const toggleDonjon = (id: string) => {
+  const toggleDonjon = async (id: string) => {
+    if (!user) return;
+
+    const donjon = donjons.find((d) => d.id === id);
+    if (!donjon) return;
+
+    const newCompletedState = !donjon.completed;
+
+    // Optimistically update UI
     setDonjons(
-      donjons.map((donjon) =>
-        donjon.id === id ? { ...donjon, completed: !donjon.completed } : donjon
+      donjons.map((d) =>
+        d.id === id ? { ...d, completed: newCompletedState } : d
       )
     );
+
+    try {
+      const { error } = await supabase.from("user_donjon_progress").upsert(
+        {
+          user_id: user.id,
+          donjon_id: id,
+          completed: newCompletedState,
+          completed_at: newCompletedState ? new Date().toISOString() : null,
+        },
+        {
+          onConflict: "user_id,donjon_id",
+        }
+      );
+
+      if (error) throw error;
+    } catch (error: any) {
+      // Revert on error
+      setDonjons(
+        donjons.map((d) =>
+          d.id === id ? { ...d, completed: !newCompletedState } : d
+        )
+      );
+      toast({
+        title: "Erreur",
+        description: "Impossible de sauvegarder la progression",
+        variant: "destructive",
+      });
+    }
   };
 
   const filteredDonjons = useMemo(() => {
@@ -65,16 +151,36 @@ const Index = () => {
     };
   }, [donjons]);
 
+  if (authLoading || loadingProgress) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto" />
+          <p className="text-muted-foreground">Chargement...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
       <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
         {/* Header */}
         <header className="text-center space-y-4 py-8">
-          <div className="flex items-center justify-center gap-3 mb-2">
+          <div className="flex items-center justify-center gap-3 mb-2 relative">
             <Scroll className="w-12 h-12 text-primary" />
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
               Run de Vaga
             </h1>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={signOut}
+              className="absolute right-0 top-0"
+              title="Se déconnecter"
+            >
+              <LogOut className="w-5 h-5" />
+            </Button>
           </div>
           <p className="text-lg text-muted-foreground">
             Guide complet TDD & TDM - Suivi de progression
