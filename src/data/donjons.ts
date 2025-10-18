@@ -166,14 +166,14 @@ export const donjonsData: Donjon[] = [
   // TDD PARTIE 2
   {
     id: "7",
-    nom: "Clos des Blops",
+    nom: "Objectif clos des Blops",
     boss: "Blop Royal Indigo",
     niveau: 60,
     category: "TDD Partie 2",
     succes: [],
-    kamasParPerso: 0,
-    kamasTotal: 0,
-    pointsSucces: 0,
+    kamasParPerso: 11472,
+    kamasTotal: 45888,
+    pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=I9Nhmlwia6vg5yRy&t=248",
     notes: "Garder la save pour faire le multi plus tard",
     travelCommand: "/travel 2 -1",
@@ -191,6 +191,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 0,
     pointsSucces: 0,
     details: "1 casque, 1 aile en bois amélioré",
+    travelCommand: "/travel 11 10",
     completed: false,
   },
   {
@@ -260,6 +261,21 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 0,
     details: "Chemin Wabbit GM : https://papycha.fr/chemin-du-wabbit-gm/",
     travelCommand: "/travel 2 -1",
+    completed: false,
+  },
+  {
+    id: "9c",
+    nom: "Capture du Wabbit GM",
+    boss: "Objectif",
+    niveau: 60,
+    category: "TDD Partie 2",
+    type: "quete",
+    succes: [],
+    kamasParPerso: 0,
+    kamasTotal: 0,
+    pointsSucces: 0,
+    details: "Chemin Wabbit GM : https://papycha.fr/chemin-du-wabbit-gm/",
+    travelCommand: "/travel -16 2",
     completed: false,
   },
   {
@@ -341,7 +357,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 175840,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=vRpt9U5DzlOeboju&t=439",
-    travelCommand: "/travel 2 -1",
+    travelCommand: "/travel -16 2",
     completed: false,
   },
   {
@@ -360,6 +376,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 191520,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=9Krkh69gaXBSQRZH&t=453",
+    travelCommand: "/travel -16 2",
     completed: false,
   },
   {
@@ -377,6 +394,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 223440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=9Krkh69gaXBSQRZH&t=453",
+    travelCommand: "/travel -16 2",
     completed: false,
   },
   {
@@ -396,6 +414,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 223440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=Ym0-DQyk019dsyBm&t=567",
+    travelCommand: "/travel -16 2",
     completed: false,
   },
   {
@@ -414,6 +433,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 197600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=O-DXp89Gk_u9Emrj&t=584",
+    travelCommand: "/travel -16 2",
     completed: false,
   },
 

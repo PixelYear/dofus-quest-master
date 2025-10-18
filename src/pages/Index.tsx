@@ -170,7 +170,7 @@ const Index = () => {
           <div className="flex items-center justify-center gap-3 mb-2 relative">
             <Scroll className="w-12 h-12 text-primary" />
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-              Run de Vaga
+              Objectifs
             </h1>
             <Button
               variant="ghost"
