@@ -18,7 +18,7 @@ export interface Donjon {
   lienVideo?: string;
   notes?: string;
   completed: boolean;
-  travelCommand?: string;
+  travelCommand?: string | string[];
   type?: "quete" | "donjon";
   details?: string;
 }
@@ -43,7 +43,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 22560,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=YbSCRyFpySc18nZG&t=152",
-    travelCommand: "/travel 1 -15",
+    travelCommand: ["/travel 13 -28", "/travel 1 -15"],
     notes: "Se rendre chez Emma Tom Pouce",
     completed: false,
   },
@@ -124,6 +124,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 93440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=kp9L3IJGyojAMHKf&t=209",
+    travelCommand: ["/travel -4 -7", "/travel 1 -15"],
     completed: false,
   },
   {
@@ -1181,6 +1182,24 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 70,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=q_rJcZGr93lI3Ri6&t=1299",
     notes: "Utiliser la save salle tot",
+    completed: false,
+  },
+  {
+    id: "56",
+    nom: "Grotte du Bworker",
+    boss: "Bworker",
+    niveau: 180,
+    category: "TDM Partie 6",
+    succes: [
+      { nom: "Spécial", type: "challenge" },
+      { nom: "Duo", type: "challenge" },
+      { nom: "Chall monstre", type: "monstre" },
+      { nom: "CAPTURE 1000", type: "capture" },
+    ],
+    kamasParPerso: 143920,
+    kamasTotal: 575680,
+    pointsSucces: 50,
+    lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=8X5upgJs7Ru44Soi&t=1370",
     completed: false,
   },
 ];

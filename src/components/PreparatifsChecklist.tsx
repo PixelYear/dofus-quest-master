@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
-import { Copy } from "lucide-react";
+import { Copy, ChevronDown, ChevronUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface PreparatifItem {
   id: string;
@@ -44,6 +46,7 @@ const preparatifs: PreparatifItem[] = [
 
 export const PreparatifsChecklist = () => {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem("preparatifs-checked");
@@ -79,37 +82,78 @@ export const PreparatifsChecklist = () => {
     }
   };
 
+  const sortedItems = useMemo(() => {
+    const unchecked = preparatifs.filter((item) => !checkedItems.has(item.id));
+    const checked = preparatifs.filter((item) => checkedItems.has(item.id));
+    return [...unchecked, ...checked];
+  }, [checkedItems]);
+
+  const allChecked = useMemo(() => {
+    return preparatifs.length === checkedItems.size;
+  }, [checkedItems]);
+
+  useEffect(() => {
+    if (allChecked) {
+      setIsOpen(false);
+    }
+  }, [allChecked]);
+
   return (
-    <Card className="border-2 shadow-md">
-      <CardHeader>
-        <CardTitle className="text-xl flex items-center gap-2">
-          <Copy className="w-5 h-5" />
-          Préparatifs
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {preparatifs.map((item) => (
-            <div key={item.id} className="flex items-center space-x-2 group">
-              <Checkbox
-                id={item.id}
-                checked={checkedItems.has(item.id)}
-                onCheckedChange={(checked) => handleCheck(item.id, checked as boolean)}
-              />
-              <label
-                htmlFor={item.id}
-                className="text-sm cursor-pointer hover:text-primary transition-colors flex-1"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCopy(item.label);
-                }}
-              >
-                {item.label}
-              </label>
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Card className="border-2 shadow-md">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-xl flex items-center gap-2">
+              <Copy className="w-5 h-5" />
+              Préparatifs
+              {allChecked && (
+                <span className="text-sm font-normal text-muted-foreground">
+                  (Complété)
+                </span>
+              )}
+            </CardTitle>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm">
+                {isOpen ? (
+                  <ChevronUp className="h-4 w-4" />
+                ) : (
+                  <ChevronDown className="h-4 w-4" />
+                )}
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+        </CardHeader>
+        <CollapsibleContent>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {sortedItems.map((item) => {
+                const isChecked = checkedItems.has(item.id);
+                return (
+                  <div key={item.id} className="flex items-center space-x-2 group">
+                    <Checkbox
+                      id={item.id}
+                      checked={isChecked}
+                      onCheckedChange={(checked) => handleCheck(item.id, checked as boolean)}
+                    />
+                    <label
+                      htmlFor={item.id}
+                      className={`text-sm cursor-pointer hover:text-primary transition-colors flex-1 ${
+                        isChecked ? "line-through text-muted-foreground" : ""
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCopy(item.label);
+                      }}
+                    >
+                      {item.label}
+                    </label>
+                  </div>
+                );
+              })}
             </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+          </CardContent>
+        </CollapsibleContent>
+      </Card>
+    </Collapsible>
   );
 };

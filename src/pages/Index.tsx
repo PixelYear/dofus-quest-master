@@ -130,13 +130,19 @@ const Index = () => {
   };
 
   const filteredDonjons = useMemo(() => {
-    return donjons.filter((donjon) => {
+    const filtered = donjons.filter((donjon) => {
       const matchesSearch =
         donjon.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
         donjon.boss.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory =
         filterCategory === "all" || donjon.category === filterCategory;
       return matchesSearch && matchesCategory;
+    });
+    
+    // Sort: incomplete first, completed last
+    return filtered.sort((a, b) => {
+      if (a.completed === b.completed) return 0;
+      return a.completed ? 1 : -1;
     });
   }, [donjons, searchTerm, filterCategory]);
 

@@ -125,15 +125,32 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
 
         {/* Bouton Travel */}
         {donjon.travelCommand && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => copyToClipboard(donjon.travelCommand!)}
-            className="w-full gap-2"
-          >
-            <Copy className="w-4 h-4" />
-            Copier : {donjon.travelCommand}
-          </Button>
+          <div className="space-y-2">
+            {Array.isArray(donjon.travelCommand) ? (
+              donjon.travelCommand.map((cmd, idx) => (
+                <Button
+                  key={idx}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(cmd)}
+                  className="w-full gap-2"
+                >
+                  <Copy className="w-4 h-4" />
+                  Copier : {cmd}
+                </Button>
+              ))
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copyToClipboard(donjon.travelCommand as string)}
+                className="w-full gap-2"
+              >
+                <Copy className="w-4 h-4" />
+                Copier : {donjon.travelCommand}
+              </Button>
+            )}
+          </div>
         )}
 
         {/* Bouton pour développer/réduire */}
