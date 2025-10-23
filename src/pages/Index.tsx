@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Scroll, Search, Trophy, Coins, Target, LogOut, Loader2 } from "lucide-react";
 import { DonjonCard } from "@/components/DonjonCard";
+import { PreparatifsChecklist } from "@/components/PreparatifsChecklist";
 import { donjonsData, type Category } from "@/data/donjons";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -202,6 +203,9 @@ const Index = () => {
             </Badge>
           </div>
         </header>
+
+        {/* Préparatifs */}
+        <PreparatifsChecklist />
 
         {/* Filtres et recherche */}
         <div className="flex flex-col sm:flex-row gap-4 bg-card p-4 rounded-lg border-2 shadow-md">
