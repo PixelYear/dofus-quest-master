@@ -688,6 +688,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 22560,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=ttLhyGkrz9cXLFrZ&t=151",
+    travelCommand: "/travel 6 -18",
     completed: false,
   },
   {
@@ -708,6 +709,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 22560,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=qfc1BSfMs34U0R0x&t=164",
+    travelCommand: ["/travel 6 -18", "Foire du Trool", "/travel -6 -37"],
     completed: false,
   },
 
@@ -728,6 +730,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 57120,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=lYKTwpt6NlNDHIMb&t=174",
+    travelCommand: ["Foire du Trool", "/travel -6 -37"],
     completed: false,
   },
   {
@@ -747,6 +750,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=52_NqwHOm15_8g9L&t=185",
+    travelCommand: ["Foire du Trool", "/travel -6 -37", "Village", "/travel 5 0"],
     completed: false,
   },
 
@@ -768,6 +772,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 57120,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=Gb5WOH5hdyRaq-qA&t=223",
+    travelCommand: ["Village", "/travel 5 0"],
     completed: false,
   },
   {
@@ -786,6 +791,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 83520,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=KlXIsAKmS7B4hP71&t=265",
+    travelCommand: ["Village", "/travel 5 0"],
     completed: false,
   },
   {
@@ -806,6 +812,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 97440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=KlXIsAKmS7B4hP71&t=265",
+    travelCommand: ["Village", "/travel 5 0"],
     completed: false,
   },
   {
@@ -826,6 +833,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 97440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=KlXIsAKmS7B4hP71&t=265",
+    travelCommand: ["Village", "/travel 5 0"],
     completed: false,
   },
   {
@@ -845,6 +853,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 97440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=OZZDyqkdxsGqRR5q&t=332",
+    travelCommand: ["Village", "/travel 5 0"],
     completed: false,
   },
   {
@@ -865,6 +874,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 175840,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=TBgMqlKkjpaOA9Oq&t=343",
+    travelCommand: ["Village", "/travel 5 0"],
     completed: false,
   },
 
