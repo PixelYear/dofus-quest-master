@@ -5,6 +5,11 @@ export interface Succes {
   type: "challenge" | "monstre" | "capture" | "other";
 }
 
+export interface TravelCommand {
+  command: string;
+  description?: string;
+}
+
 export interface Donjon {
   id: string;
   nom: string;
@@ -18,7 +23,7 @@ export interface Donjon {
   lienVideo?: string;
   notes?: string;
   completed: boolean;
-  travelCommand?: string | string[];
+  travelCommand?: string | (string | TravelCommand)[];
   type?: "quete" | "donjon";
   details?: string;
 }
@@ -43,7 +48,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 22560,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=YbSCRyFpySc18nZG&t=152",
-    travelCommand: ["Astrub", "/travel 13 -28", "/travel 1 -15"],
+    travelCommand: ["Astrub", { command: "/travel 13 -28", description: "(pos donjon)" }, "/travel 1 -15"],
     notes: "Se rendre chez Emma Tom Pouce",
     completed: false,
   },
@@ -64,7 +69,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=00gsbrZ1Ff2bkgBD&t=165",
-    travelCommand: ["Astrub", "/travel 1 -15"],
+    travelCommand: ["Astrub", "/travel 1 -15", { command: "/travel 3 -17", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -83,7 +88,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 57120,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=uZ_4fyFIOkyj5BbB&t=181",
-    travelCommand: ["Astrub", "/travel 1 -15"],
+    travelCommand: ["Astrub", "/travel 1 -15", { command: "/travel -13 -41", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -104,7 +109,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=pXeMmw4hy7tNvblj&t=193",
-    travelCommand: ["Astrub", "/travel 1 -15"],
+    travelCommand: ["Astrub", "/travel 1 -15", { command: "/travel -5 3", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -124,7 +129,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 93440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=kp9L3IJGyojAMHKf&t=209",
-    travelCommand: ["Astrub", "/travel -4 -7", "/travel 1 -15"],
+    travelCommand: ["Astrub", "/travel -4 -7", "/travel 1 -15", { command: "/travel -4 7", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -159,7 +164,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 69600,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=bWU8DiVuUbwp1gJ4&t=229",
-    travelCommand: ["Astrub", "/travel 1 -15"],
+    travelCommand: ["Astrub", "/travel 1 -15", { command: "/travel -59 14", description: "(pos donjon)" }],
     notes: "Faire la quête Gardien du pont de la mort : https://www.dofuspourlesnoobs.com/le-gardien-du-pont-de-la-mort.html",
     completed: false,
   },
@@ -177,7 +182,7 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=I9Nhmlwia6vg5yRy&t=248",
     notes: "Garder la save pour faire le multi plus tard",
-    travelCommand: ["Village d'Amakna", "/travel 2 -1"],
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel -7 -43", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -211,7 +216,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 114720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=bODQsjKR1aY_Nl7_&t=268",
-    travelCommand: ["Village d'Amakna", "/travel 2 -1"],
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel 29 9", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -247,7 +252,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 114720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=6DqlekiJAXs81SM9&t=287",
-    travelCommand: "Village d'Amakna",
+    travelCommand: ["Village d'Amakna", { command: "/travel 24 -13", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -318,7 +323,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 150720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=jeTbb0LwpMtn4iUo&t=350",
-    travelCommand: ["Village d'Amakna", "/travel 2 -1"],
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel -4 29", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -337,7 +342,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 100480,
     pointsSucces: 50,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=dQ9Um8mOlsIQ6sRE&t=376",
-    travelCommand: ["Village d'Amakna", "/travel 2 -1"],
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel -55 -4", description: "(pos donjon)" }],
     completed: false,
   },
 
@@ -359,7 +364,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 175840,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=vRpt9U5DzlOeboju&t=439",
-    travelCommand: ["Eleveur", "/travel -16 2"],
+    travelCommand: ["Eleveur", "/travel -16 2", { command: "/travel -27 17", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -378,7 +383,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 191520,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=9Krkh69gaXBSQRZH&t=453",
-    travelCommand: ["Eleveur", "/travel -16 2"],
+    travelCommand: ["Eleveur", "/travel -16 2", { command: "/travel 19 -61", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -396,7 +401,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 223440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=9Krkh69gaXBSQRZH&t=453",
-    travelCommand: ["Eleveur", "/travel -16 2"],
+    travelCommand: ["Eleveur", "/travel -16 2", { command: "/travel 28 -12", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -416,7 +421,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 223440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=Ym0-DQyk019dsyBm&t=567",
-    travelCommand: ["Eleveur", "/travel -16 2"],
+    travelCommand: ["Eleveur", "/travel -16 2", { command: "/travel 33 3", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -435,7 +440,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 197600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=O-DXp89Gk_u9Emrj&t=584",
-    travelCommand: ["Eleveur", "/travel -16 2"],
+    travelCommand: ["Eleveur", "/travel -16 2", { command: "/travel -22 12", description: "(pos donjon)" }],
     completed: false,
   },
 
@@ -457,7 +462,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 276640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=wjuRJ0eAOj1nFwBv&t=604",
-    travelCommand: "Otomai",
+    travelCommand: ["Otomai", { command: "/travel -6 -15", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -477,7 +482,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 335440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=w7cKFVzUcDZHCtCS&t=629",
-    travelCommand: "Otomai",
+    travelCommand: ["Otomai", { command: "/travel -3 25", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -497,7 +502,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 335440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=w7cKFVzUcDZHCtCS&t=629",
-    travelCommand: "Otomai",
+    travelCommand: ["Otomai", { command: "/travel 21 7", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -517,7 +522,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 239600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=pKotijBEyLRrn3cM&t=792",
-    travelCommand: "Otomai",
+    travelCommand: ["Otomai", { command: "/travel 29 6", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -537,7 +542,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 285600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=ViKjq9DCN5wC3Pe2&t=856",
-    travelCommand: "Otomai",
+    travelCommand: ["Otomai", { command: "/travel -51 9", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -560,7 +565,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 479200,
     pointsSucces: 110,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=4awSACtLmbg7y3s8&t=945",
-    travelCommand: "Otomai",
+    travelCommand: ["Otomai", { command: "/travel -7 -43", description: "(pos donjon)" }],
     completed: false,
   },
 
@@ -583,7 +588,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 626640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=xFEX_VCfRdbLIBRd&t=1001",
-    travelCommand: "Sufokia",
+    travelCommand: ["Sufokia", { command: "/travel -53 20", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -603,7 +608,7 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 40,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=XkecJfjYXjmsGG8K&t=1047",
     notes: "Y aller à 4 persos",
-    travelCommand: "Sufokia",
+    travelCommand: ["Sufokia", { command: "/travel 5 -8", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -622,7 +627,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 460480,
     pointsSucces: 40,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=gDn-ICfqYnWWutM6&t=1154",
-    travelCommand: "Sufokia",
+    travelCommand: ["Sufokia", { command: "/travel -54 16", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -642,7 +647,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 575680,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=u-mxlOo_Q8wt6alm&t=1224",
-    travelCommand: "Sufokia",
+    travelCommand: ["Sufokia", { command: "/travel -9 29", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -661,7 +666,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 1055520,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=zC6_GU1AO_YFT_K1&t=1371",
-    travelCommand: "Sufokia",
+    travelCommand: ["Sufokia", { command: "/travel 21 18", description: "(pos donjon)" }],
     completed: false,
   },
   {

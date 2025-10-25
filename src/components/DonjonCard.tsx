@@ -14,7 +14,7 @@ import {
   Scroll,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { Donjon } from "@/data/donjons";
+import { Donjon, TravelCommand } from "@/data/donjons";
 import { useState } from "react";
 
 interface DonjonCardProps {
@@ -127,18 +127,24 @@ export function DonjonCard({ donjon, onToggle }: DonjonCardProps) {
         {donjon.travelCommand && (
           <div className="space-y-2">
             {Array.isArray(donjon.travelCommand) ? (
-              donjon.travelCommand.map((cmd, idx) => (
-                <Button
-                  key={idx}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => copyToClipboard(cmd)}
-                  className="w-full gap-2"
-                >
-                  <Copy className="w-4 h-4" />
-                  Copier : {cmd}
-                </Button>
-              ))
+              donjon.travelCommand.map((cmd, idx) => {
+                const isObject = typeof cmd === 'object' && cmd !== null && 'command' in cmd;
+                const commandText: string = isObject ? (cmd as TravelCommand).command : (cmd as string);
+                const description = isObject ? (cmd as TravelCommand).description : null;
+                
+                return (
+                  <Button
+                    key={idx}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(commandText)}
+                    className="w-full gap-2"
+                  >
+                    <Copy className="w-4 h-4" />
+                    Copier : {commandText} {description && <span className="text-muted-foreground">({description})</span>}
+                  </Button>
+                );
+              })
             ) : (
               <Button
                 variant="outline"
