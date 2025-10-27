@@ -914,6 +914,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 276640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=V29gY_Q1qwi7oz8E&t=362",
+    travelCommand: ["/travel -29 -47", "Champs de Cania", { command: "/travel -9 -14", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -934,6 +935,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 239600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=HLZT-se0AD2EvXIO&t=398",
+    travelCommand: ["/travel -29 -47", "Champs de Cania", { command: "/travel -1 33", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -954,6 +956,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 335440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=ZQjkPDpoe0myb3mA&t=424",
+    travelCommand: ["/travel -29 -47", "Champs de Cania", { command: "/travel -17 8", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -974,6 +977,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 335440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=Scol60Zv_2dHL9iY&t=493",
+    travelCommand: ["/travel -29 -47", "Champs de Cania", { command: "/travel -23 0", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -994,6 +998,7 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=EBP3TvXXmd7enVJO&t=542",
     notes: "Check gardienne des égouts",
+    travelCommand: ["/travel -29 -47", "Champs de Cania", { command: "/travel -34 -59", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -1014,6 +1019,7 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=KKIlGRtdv7ju_cew&t=585",
     notes: "Check gardienne des égouts",
+    travelCommand: ["/travel -29 -47", "Champs de Cania", { command: "/travel -28 37", description: "(pos donjon)" }],
     completed: false,
   },
 
