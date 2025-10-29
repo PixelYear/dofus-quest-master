@@ -727,7 +727,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 22560,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/Tsl5Ccxj9ZY?si=qfc1BSfMs34U0R0x&t=164",
-    travelCommand: ["Astrub", "/travel 6 -18", "Foire du Trool", "/travel -6 -37", { command: "/travel 2 -34", description: "(pos donjon)" }],
+    travelCommand: ["Astrub", "/travel 6 -18", { command: "/travel 2 -34", description: "(pos donjon)" }, "Foire du Trool", "/travel -6 -37"],
     completed: false,
   },
 
