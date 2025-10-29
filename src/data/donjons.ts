@@ -588,7 +588,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 626640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=xFEX_VCfRdbLIBRd&t=1001",
-    travelCommand: ["Sufokia", { command: "/travel -53 20", description: "(pos donjon)" }],
+    travelCommand: ["Sufokia", "/travel 16 27", { command: "/travel -53 20", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -608,7 +608,7 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 40,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=XkecJfjYXjmsGG8K&t=1047",
     notes: "Y aller à 4 persos",
-    travelCommand: ["Sufokia", { command: "/travel 5 -8", description: "(pos donjon)" }],
+    travelCommand: ["Sufokia", "/travel 16 27", { command: "/travel 5 -8", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -627,7 +627,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 460480,
     pointsSucces: 40,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=gDn-ICfqYnWWutM6&t=1154",
-    travelCommand: ["Sufokia", { command: "/travel -54 16", description: "(pos donjon)" }],
+    travelCommand: ["Sufokia", "/travel 16 27", { command: "/travel -54 16", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -647,7 +647,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 575680,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=u-mxlOo_Q8wt6alm&t=1224",
-    travelCommand: ["Sufokia", { command: "/travel -9 29", description: "(pos donjon)" }],
+    travelCommand: ["Sufokia", "/travel 16 27", { command: "/travel -9 29", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -666,7 +666,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 1055520,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=zC6_GU1AO_YFT_K1&t=1371",
-    travelCommand: ["Sufokia", { command: "/travel 21 18", description: "(pos donjon)" }],
+    travelCommand: ["Sufokia", "/travel 16 27", { command: "/travel 21 18", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -683,6 +683,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 575680,
     pointsSucces: 30,
     notes: "Prendre un panda en 5ème compte",
+    travelCommand: ["Sufokia", "/travel 16 27"],
     completed: false,
   },
 
