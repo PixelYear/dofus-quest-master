@@ -252,7 +252,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 114720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=6DqlekiJAXs81SM9&t=287",
-    travelCommand: ["Village d'Amakna", { command: "/travel 24 -13", description: "(pos donjon)" }],
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel 24 -13", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -462,7 +462,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 276640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=wjuRJ0eAOj1nFwBv&t=604",
-    travelCommand: ["Otomai", { command: "/travel -6 -15", description: "(pos donjon)" }],
+    travelCommand: ["Otomai", "/travel -45 19", { command: "/travel -6 -15", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -482,7 +482,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 335440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=w7cKFVzUcDZHCtCS&t=629",
-    travelCommand: ["Otomai", { command: "/travel -3 25", description: "(pos donjon)" }],
+    travelCommand: ["Otomai", "/travel -45 19", { command: "/travel -3 25", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -502,7 +502,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 335440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=w7cKFVzUcDZHCtCS&t=629",
-    travelCommand: ["Otomai", { command: "/travel 21 7", description: "(pos donjon)" }],
+    travelCommand: ["Otomai", "/travel -45 19", { command: "/travel 21 7", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -522,7 +522,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 239600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=pKotijBEyLRrn3cM&t=792",
-    travelCommand: ["Otomai", { command: "/travel 29 6", description: "(pos donjon)" }],
+    travelCommand: ["Otomai", "/travel -45 19", { command: "/travel 29 6", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -542,7 +542,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 285600,
     pointsSucces: 60,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=ViKjq9DCN5wC3Pe2&t=856",
-    travelCommand: ["Otomai", { command: "/travel -51 9", description: "(pos donjon)" }],
+    travelCommand: ["Otomai", "/travel -45 19", { command: "/travel -51 9", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -565,7 +565,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 479200,
     pointsSucces: 110,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=4awSACtLmbg7y3s8&t=945",
-    travelCommand: ["Otomai", { command: "/travel -7 -43", description: "(pos donjon)" }],
+    travelCommand: ["Otomai", "/travel -45 19", { command: "/travel -7 -43", description: "(pos donjon)" }],
     completed: false,
   },
 
