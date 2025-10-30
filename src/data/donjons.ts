@@ -88,7 +88,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 57120,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=uZ_4fyFIOkyj5BbB&t=181",
-    travelCommand: ["Astrub", "/travel 1 -15", { command: "/travel -13 -41", description: "(pos donjon)" }],
+    travelCommand: ["Astrub", "/travel 1 -15", "Trool", { command: "/travel -13 -41", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -109,7 +109,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 66640,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=pXeMmw4hy7tNvblj&t=193",
-    travelCommand: ["Astrub", "/travel 1 -15", { command: "/travel -5 3", description: "(pos donjon)" }],
+    travelCommand: ["Astrub", "/travel 1 -15", "Bouf", { command: "/travel -5 3", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -129,7 +129,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 93440,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=kp9L3IJGyojAMHKf&t=209",
-    travelCommand: ["Astrub", "/travel -4 -7", "/travel 1 -15", { command: "/travel -4 7", description: "(pos donjon)" }],
+    travelCommand: ["Astrub", "/travel 1 -15", "Craq", { command: "/travel -4 -7", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -181,8 +181,8 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 45888,
     pointsSucces: 80,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=I9Nhmlwia6vg5yRy&t=248",
-    notes: "Garder la save pour faire le multi plus tard",
-    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel -7 -43", description: "(pos donjon)" }],
+    notes: "Prendre le Blop Royal Indigo. Garder la save pour faire le multi plus tard",
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", "Lac", { command: "/travel -7 -43", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -252,7 +252,7 @@ export const donjonsData: Donjon[] = [
     kamasTotal: 114720,
     pointsSucces: 70,
     lienVideo: "https://youtu.be/vP9uuGui04Q?si=6DqlekiJAXs81SM9&t=287",
-    travelCommand: ["Village d'Amakna", "/travel 2 -1", { command: "/travel 24 -13", description: "(pos donjon)" }],
+    travelCommand: ["Village d'Amakna", "/travel 2 -1", "Wabbit", { command: "/travel 24 -13", description: "(pos donjon)" }],
     completed: false,
   },
   {
@@ -268,21 +268,6 @@ export const donjonsData: Donjon[] = [
     pointsSucces: 0,
     details: "Chemin Wabbit GM : https://papycha.fr/chemin-du-wabbit-gm/",
     travelCommand: ["Village d'Amakna", "/travel 2 -1"],
-    completed: false,
-  },
-  {
-    id: "9c",
-    nom: "Capture du Wabbit GM",
-    boss: "Objectif",
-    niveau: 60,
-    category: "TDD Partie 2",
-    type: "quete",
-    succes: [],
-    kamasParPerso: 0,
-    kamasTotal: 0,
-    pointsSucces: 0,
-    details: "Chemin Wabbit GM : https://papycha.fr/chemin-du-wabbit-gm/",
-    travelCommand: ["Village d'Amakna", "/travel -16 2"],
     completed: false,
   },
   {

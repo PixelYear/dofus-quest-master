@@ -10,17 +10,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Scroll, Search, Trophy, Coins, Target, LogOut, Loader2 } from "lucide-react";
+import { Scroll, Search, Trophy, Coins, Target, LogOut, Loader2, RotateCcw, Moon, Sun } from "lucide-react";
 import { DonjonCard } from "@/components/DonjonCard";
 import { PreparatifsChecklist } from "@/components/PreparatifsChecklist";
 import { donjonsData, type Category } from "@/data/donjons";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useTheme } from "next-themes";
 
 const Index = () => {
   const { user, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
   const [donjons, setDonjons] = useState(donjonsData);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState<Category | "all">("all");
@@ -84,6 +86,34 @@ const Index = () => {
     "TDM Partie 6",
     "TDM Partie 7",
   ];
+
+  const resetRun = async () => {
+    if (!user) return;
+
+    try {
+      // Reset all donjons locally
+      setDonjons(donjonsData.map(d => ({ ...d, completed: false })));
+
+      // Delete all progress from database
+      const { error } = await supabase
+        .from("user_donjon_progress")
+        .delete()
+        .eq("user_id", user.id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Succès",
+        description: "La run a été réinitialisée",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de réinitialiser la run",
+        variant: "destructive",
+      });
+    }
+  };
 
   const toggleDonjon = async (id: string) => {
     if (!user) return;
@@ -175,19 +205,38 @@ const Index = () => {
         {/* Header */}
         <header className="text-center space-y-4 py-8">
           <div className="flex items-center justify-center gap-3 mb-2 relative">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={resetRun}
+              className="absolute left-0 top-0 gap-2"
+              title="Réinitialiser la run"
+            >
+              <RotateCcw className="w-4 h-4" />
+              Réinitialiser la run
+            </Button>
             <Scroll className="w-12 h-12 text-primary" />
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
               Objectifs
             </h1>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={signOut}
-              className="absolute right-0 top-0"
-              title="Se déconnecter"
-            >
-              <LogOut className="w-5 h-5" />
-            </Button>
+            <div className="absolute right-0 top-0 flex gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                title="Changer le thème"
+              >
+                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={signOut}
+                title="Se déconnecter"
+              >
+                <LogOut className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
           <p className="text-lg text-muted-foreground">
             Guide complet TDD & TDM - Suivi de progression
